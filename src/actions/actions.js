@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { ActionTypes as types, API as api } from '../constants';
 
 export const fetchValues = data => {

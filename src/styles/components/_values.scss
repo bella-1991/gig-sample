@@ -1,0 +1,173 @@
+// Values 
+
+.values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &__card {
+        position: relative;
+        height: 30vh;
+        width: $unit-four;
+        background-color: $secondary-blue;
+        color: $primary-blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 2px solid $pale_blue;
+        text-align: center;
+        @include border-radius(25px);
+        @include transition(all);
+
+        #{$interact} {
+            .values__text {
+                transform: translate3d(0, 0, 0);
+            }
+
+            .values__cta {
+                opacity: 1;
+                transform: translate3d(0, -10px, 0);
+                @include transition(all);
+                
+                @media (max-width: $screen-tablet) { 
+                    transform: translate3d(0, 0, 0);
+                }
+            }
+
+            .values__text {
+                transform: scale(0.85);
+
+                @media (max-width: $screen-tablet) { 
+                    transform: none;
+                }
+            }
+        }
+
+        &:nth-of-type(even),
+        &:last-of-type {
+            background-color: $white;
+        }  
+
+        &.values__card--random {
+            color: $white;            
+
+            // once this class applied, change colours randomly for each
+            @for $i from 0 to 100 {
+                &:nth-of-type(#{$i}) {
+                    @include random-colours();
+                }
+            }
+        }
+        
+        @media (max-width: $screen-tablet) {
+            padding: 1rem;
+            height: 20vh;
+            flex: 1 $unit-four;
+        }
+
+        @media (max-width: $screen-mobile) {
+            padding: 10px;
+        }
+    }  
+    
+    &__title {
+        margin-bottom: 10px;
+        @include transition(transform);
+        transform: rotate(0deg);
+        
+        @media (max-width: $screen-tablet) {
+            margin: 0;
+        }
+    }
+
+    &__description {
+        margin-bottom: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        @include transition(transform);
+        transform: rotate(0deg);
+
+        @media (max-width: $screen-tablet) {
+            display: none;
+            margin: 0;
+        }
+    }
+
+    &__text {
+        padding: 0 5rem;
+        transition: transform .35s, transform .35s;
+        transform: translate3d(0, 30px, 0);
+                
+        @media (max-width: $screen-tablet) {
+            padding: 0;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @media (max-width: $screen-mobile) {            
+            margin-top: 10px;
+        }
+    }
+
+    &__cta {
+        border: 1px solid $primary-blue;
+        color: $primary-blue;
+        background-color: transparent;        
+        text-decoration: none;
+        padding: 13px 26px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+        transition: opacity .35s, transform .35s;
+        z-index: 10;
+
+        #{$interact} {
+            background-color: $primary-blue;
+            color: $white;           
+
+            .values__card--random & {
+                color: $black;
+                background-color: $white;
+            }
+        }
+
+        .values__card--random & {
+            color: $white;
+            border-color: $white;
+        }        
+                
+        @media (max-width: $screen-tablet) {
+            opacity: 1;
+        }
+
+        @media (max-width: $screen-mobile) {            
+            padding: 10px;
+            font-size: 0.625rem;
+        }
+    }
+
+    &__overlay-link {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        text-indent: -9999px;
+    }    
+
+    &--rotate {
+        .values__title,
+        .values__description {
+            @include transition(transform);
+            transform: rotate(180deg);
+        }
+    }    
+
+    @media (max-width: $screen-tablet) {
+        justify-content: flex-start;
+    }
+}

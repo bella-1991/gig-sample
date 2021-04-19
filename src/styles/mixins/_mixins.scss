@@ -1,0 +1,79 @@
+/* autoprefixer grid: autoplace */
+
+// Clearfix
+@mixin clearfix() {
+    &:before,
+    &:after {
+      content: ' ';
+      display: table; 
+    }
+    &:after {
+      clear: both;
+    }
+}
+
+// Border radius variants
+@mixin border-radius($radius) {
+    border-radius: $radius;
+}
+
+// Box sizing
+@mixin box-sizing($boxmodel) {
+    box-sizing: $boxmodel;
+}
+
+// Transitions
+@mixin transition($property) {  
+  transition: $property ease-in-out 0.2s;
+}
+
+// functions
+
+// get random colour based on colour component - eg: rgb, hex, colourname
+@function randomiseColour() {
+  $color: (
+    octal: (
+      red: random($octalLimit)-1,
+      green: random($octalLimit),
+      blue: random($octalLimit)
+    ),
+    percent: (
+      red: random($percentLimit),
+      green: random($percentLimit),
+      blue: random($percentLimit)
+    ),
+    fraction: (
+      alpha: random(100) / 100
+    )
+  );
+
+  @return $color;
+}
+
+@function color($base, $component) {
+  $color: randomiseColour();
+  @return map-get(map-get($color, $base), $component);
+}
+
+@function getRandomColour($format: NULL) {
+  @if $format == "hex" {
+    @return rgb(color(octal, red), color(octal, green), color(octal, blue));
+  } @else if $format == 'rgb' {
+    @return unquote("rgb(#{color(octal, red)}, #{color(octal, green)}, #{color(octal, blue)})");
+  } @else if $format == "%rgb" { 
+    @return unquote("rgb(#{color(percent, red)}%, #{color(percent, green)}%, #{color(percent, blue)}%)");
+  } @else if $format == "rgba" { 
+    @return unquote("rgba(#{color(octal, red)}, #{color(octal, green)}, #{color(octal, blue)}, #{color(fraction, alpha)})");
+  } @else {
+    @return unquote(nth($colours, random( length($colours) )));
+  }
+}
+
+// get random colours based on hex. rgb, rgba or name values
+@mixin random-colours() {
+  background-color: getRandomColour();
+  border-right-color: getRandomColour("hex");
+  border-bottom-color: getRandomColour("rgb");
+  border-left-color: getRandomColour("%rgb");
+  border-top-color: getRandomColour("rgba");
+}

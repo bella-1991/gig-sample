@@ -1,0 +1,81 @@
+// Offices
+
+.offices {
+    display: flex;
+
+    &__card {
+        padding: 0 1rem;
+        min-height: 40vh;
+        width: calc(100% / 12 * 4);
+        min-width: 250px;
+        background-color: #57e5ca;
+        color: #1e1d62;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 2px solid $pale_blue;
+        text-align: center;
+        @include border-radius(25px);
+        @include transition(all);
+        
+        &:nth-of-type(odd) {
+            background-color: $white;
+        }        
+
+        &.offices__card--random {
+            color: $white;            
+
+            // once this class applied, change colours randomly for each
+            @for $i from 0 to 100 {
+                &:nth-of-type(#{$i}) {
+                    @include random-colours();
+                }
+            }
+        }
+
+        @media (max-width: $screen-large-tablet) {
+            min-width: 40vw;
+            min-height: calc(40vh - 5px);
+        }
+    }
+
+    &__country,
+    &__address {
+        @include transition(transform);
+        transform: rotate(0deg);
+    }
+
+    &--rotate {
+        .offices__country,
+        .offices__address {
+            @include transition(transform);
+            transform: rotate(180deg);
+        }
+    }
+
+    @media (max-width: $screen-large-tablet) {
+        overflow-x: auto;
+
+        &::-webkit-scrollbar {
+            height: 5px ;
+        }
+          
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background-color: $light-gray;
+            border-radius: 10px;
+        }
+           
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: $primary_blue; 
+            border-radius: 10px;
+          
+            /* Handle on hover */
+            #{interact} {
+                background: $primary_blue; 
+            }
+        }
+    }
+}

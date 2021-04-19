@@ -1,0 +1,83 @@
+/* Loader overlay */
+
+.loader { 
+    position: fixed; 
+    z-index: 20; 
+    background: #ffffff; 
+    width: 100%; 
+    height: 100%; 
+    -webkit-transition: .2s all ease; 
+    -o-transition: .2s all ease; 
+    transition: .2s all ease; 
+    -webkit-transition-delay: .5s; 
+    -o-transition-delay: .5s; 
+    transition-delay: .5s; 
+
+    &:before,
+    &:after { 
+        content: ""; 
+        position: absolute; 
+        height: 100vh;
+        width: 100vw; 
+        background-color: $pale-blue; 
+        -webkit-transition: .7s all ease; 
+        -o-transition: .7s all ease; 
+        transition: .7s all ease; 
+    } 
+
+    &:before { 
+        top: 0; 
+        left: 0; 
+    }
+
+    &:after { 
+        bottom: 0; 
+        left: 0; 
+    }
+
+    &.close { 
+        opacity: 0; 
+        visibility: hidden; 
+
+        &:before,
+        &:after { height: 0vh; }
+    }
+
+    &__spinner-container { 
+        position: absolute; 
+        top: 50%; 
+        left: 50%; 
+        transform: 
+        translate(-50%,-50%); 
+        z-index: 3; 
+    }
+}
+
+.spinner { 
+    width: 70px; 
+    height: 70px; 
+    margin: 0; 
+    background-color: $primary-blue; 
+    border-radius: 100%; 
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out; 
+    animation: sk-scaleout 1.0s infinite ease-in-out; 
+}
+
+@-webkit-keyframes sk-scaleout {
+    0% { -webkit-transform: scale(0) }
+    100% {
+        -webkit-transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-scaleout {
+    0% { 
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    } 100% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}

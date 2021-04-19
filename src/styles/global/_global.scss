@@ -1,0 +1,84 @@
+// Global styles
+*,
+*:after,
+*:before {
+    @include box-sizing(border-box);
+}
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 100%;
+}
+
+//
+// Remove default margin.
+//
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: $font-family-inter-regular, "Helvetica", "Arial", "Sans-serif";
+    color: $base_color;
+    overflow-x: hidden;
+    font-size: $font-size-base;
+    font-size: 1rem;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+img {
+    border: 0;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+}
+
+//
+// Remove most spacing between table cells.
+//
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+ul,
+ol {
+    margin: 0;
+}
+
+.app {
+    position: relative; 
+
+    &--monochrome {
+        filter: grayscale(1);
+    }
+}

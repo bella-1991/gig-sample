@@ -1,0 +1,287 @@
+// Menu
+
+.menu {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    z-index: 15;
+    @include transition(all);
+
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 20px;
+
+        .menu--open & {
+            border-bottom: 2px solid $primary-blue;
+        }
+    }
+
+    &__hamburger {  
+        display: inline-block;
+        line-height: 30px;
+        color: $black;    
+        border: 1px solid $black;
+        background: transparent;
+        box-shadow: none;
+        cursor: pointer;
+        @include border-radius(5px);   
+
+        .app--monochrome & {
+            color: $white;
+            border-color: $white;
+        }
+
+        #{$interact} {      
+            .menu__bar:nth-of-type(1) {          
+                top: 0px;
+                opacity: 0;
+                transition-delay: 0ms;
+            }
+
+            .menu__bar:nth-of-type(2) {          
+                top: 6px;
+                transition-delay: 40ms;
+            }
+
+            .menu__bar:nth-of-type(3) {          
+                top: 12px;
+                transition-delay: 80ms;
+            }
+
+            .menu__bar:nth-of-type(4) {          
+                top: 18px;
+                opacity: 1;
+                transition-delay: 125ms;
+            }
+        }
+    }
+
+    &__bars {        
+        display: inline-block;
+        padding: 0 6px;
+        width: 30px;
+        height: 28px;
+        overflow: hidden;
+        position: relative;
+        vertical-align: middle;
+    }
+
+    &__bar {
+        display: block;
+        position: absolute;
+        width: 18px;
+        height: 2px;
+        background-color: $black;
+        transition: 375ms;
+        transition-property: top, opacity;
+
+        .app--monochrome & {
+            background-color: $white;
+        }
+
+        &:nth-of-type(1) {            
+            top: 6px;
+            opacity: 1;
+            transition-delay: 125ms;
+        }
+
+        &:nth-of-type(2) {            
+            top: 12px;
+            transition-delay: 80ms;
+        }
+
+        &:nth-of-type(3) {            
+            top: 18px;
+            transition-delay: 40ms;
+        }
+
+        &:nth-of-type(4) {            
+            top: 24px;
+            opacity: 0;
+            transition-delay: 0ms;
+        }
+    }    
+
+    &__nav {
+        width: 0;
+        padding: 0 20px;
+        visibility: hidden;
+        @include transition(width);
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+        border-bottom: 1px solid $light-gray;
+
+        &--row {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    &__label {
+        line-height: 34px;
+        display: inline-block;
+        color: $primary-blue;
+        font-family: $font-family-inter-semi-bold;
+    }
+
+    &__lang-dropdown {
+        width: 100%;
+        height: 30px;
+        padding: 0 10px;
+        text-transform: uppercase;
+    }
+
+    &__button {
+        border: 1px solid $secondary-blue;
+        color: $primary-blue;
+        background-color: $secondary-blue;
+        padding: 13px 26px;
+        font-weight: 600;
+        width: 100%;
+        cursor: pointer;
+        border: none;
+        box-shadow: none;
+        @include border-radius(5px);
+        @include transition(background-color);
+
+        #{$interact} {
+            background-color: $bright-blue;
+            color: $white;
+            @include transition(background-color);
+        }
+
+        &--secondary {
+            background-color: transparent;
+            border: 1px solid $primary-blue;
+
+            #{$interact} {
+                background-color: $primary-blue;
+                @include transition(background-color);
+            }
+        }
+    }
+
+    &__switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        opacity: 0;
+        visibility: hidden;
+        @include transition(opacity);
+
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+
+            &:checked + .menu__slider {
+                background-color: $primary-blue;
+
+                &:before {
+                    transform: translateX(26px);
+                }
+            }
+        }
+    }
+
+    &__slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $light-gray;
+        @include transition(all);
+        border-radius: 34px;
+
+        &:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: $white;
+            border-radius: 50%;
+            @include transition(all);
+        }
+    }
+
+    &--open {
+        height: $unit-twelve;
+        background: $white;
+        @include transition(all);
+
+        .menu__hamburger {            
+            .app--monochrome & {
+                color: $black;
+                border-color: $black;
+            }
+
+            .menu__bar {                
+                .app--monochrome & {
+                    background-color: $black;
+                }
+                
+                &:nth-of-type(1) { 
+                    top: 12px;
+                    transform-origin: 50% 50%;
+                    transform: rotate(45deg) scaleX(1.442);
+                    opacity: 1;
+                    transition-delay: 0ms;
+                    transition-property: top, transform;
+                }
+        
+                &:nth-of-type(2) {          
+                    top: 12px;
+                    opacity: 0;
+                    transition-delay: 0ms;
+                }
+        
+                &:nth-of-type(3) {          
+                    top: 12px;
+                    transform-origin: 50% 50%;
+                    transform: rotate(-45deg) scaleX(1.442);
+                    transition-delay: 0ms;
+                    transition-property: top, transform;
+                }
+        
+                &:nth-of-type(4) {          
+                    top: 24px;
+                    opacity: 0;
+                    transition: 0ms;
+                    transition-delay: 0ms;
+                }
+            }
+        }
+
+        .menu__nav {
+            width: 20vw;
+            visibility: visible;
+            @include transition(width);
+
+            @media (max-width: $screen-large-tablet) {
+                width: 50vw;
+            }
+            
+            @media (max-width: $screen-mobile) {
+                width: 80vw;
+            }
+        }
+
+        .menu__switch {
+            opacity: 1;
+            visibility: visible;
+            @include transition(opacity);
+        }
+    }
+}

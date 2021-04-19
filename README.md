@@ -1,7 +1,7 @@
 # Getting Started with GiG Sample project
 
 1. Clone repo
-2. yarn install
+2. npm install
 3. npm start
 4. navigate to http://localhost:3000/
 

@@ -4,7 +4,6 @@
 2. yarn install
 3. yarn start
 4. navigate to http://localhost:3000/
-5. Alternatively navigate to http://gig-sample.herokuapp.com/ to view project
 
 # Getting Started with Create React App
 
